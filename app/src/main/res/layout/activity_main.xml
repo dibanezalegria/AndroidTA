@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pbluedotsoft.pcarstimeattackadfree.MainActivity">
+
+    <!-- DEBUG button -->
+    <Button
+        android:id="@+id/debug_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:text="Insert in session"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/blackText"
+        android:visibility="gone"/>
+
+    <!-- DEBUG text view -->
+    <TextView
+        android:id="@+id/debug_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/medium_text"
+        android:textColor="@color/blackText"
+        android:visibility="gone"/>
+
+    <!-- TabLayout and ViewPager -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/grey_900"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/viewpager_tabs"
+            style="@style/CustomTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            app:tabMode="scrollable"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_900"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:maxLines="1"
+            android:background="@android:color/black"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="LAP"
+                android:textSize="@dimen/small_text"
+                android:textColor="@color/whiteText"/>
+
+            <TextView
+                android:id="@+id/info_nlap_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="@dimen/small_text"
+                android:text="6"
+                android:textColor="@color/whiteText"/>
+        </LinearLayout>
+
+        <!-- Car @ Track -->
+        <TextView
+            android:id="@+id/info_car_track_combo_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textSize="@dimen/small_text"
+            android:text="@string/waiting_car_info"
+            android:textColor="@color/grey_900"/>
+
+        <LinearLayout
+            android:id="@+id/record_bg_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:maxLines="1"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:background="@android:color/black"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="@dimen/small_text"
+                android:text="REC"
+                android:textColor="@color/whiteText"/>
+
+            <TextView
+                android:id="@+id/info_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:maxLines="1"
+                android:textSize="@dimen/small_text"
+                android:text="--:--:---"
+                android:textColor="@color/whiteText"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

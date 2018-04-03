@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBg"
+    android:orientation="vertical"
+    tools:context="com.pbluedotsoft.pcarstimeattackadfree.DBActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkBg"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/track_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="0dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="track"
+            android:textColor="@color/blackText"/>
+
+        <Button
+            android:id="@+id/car_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="0dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="car"
+            android:textColor="@color/blackText"/>
+
+        <Button
+            android:id="@+id/car_class_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="0dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="class"
+            android:textColor="@color/blackText"/>
+
+        <Button
+            android:id="@+id/nlaps_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="0dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="laps"
+            android:textColor="@color/blackText"/>
+
+        <Button
+            android:id="@+id/time_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="0dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="time"
+            android:textColor="@color/blackText"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/layout_laptimes_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:padding="48dp"
+        android:contentDescription="@string/empty_list_view_description"
+        android:src="@mipmap/database_icon"
+        android:tint="@color/empty_list_icon_tint"/>
+
+    <ListView
+        android:id="@+id/laptimes_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/holo_blue_dark"/>
+
+</LinearLayout>

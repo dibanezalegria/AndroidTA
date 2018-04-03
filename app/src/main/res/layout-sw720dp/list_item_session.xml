@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingTop="5dp"
+              android:paddingBottom="5dp"
+              tools:context="com.pbluedotsoft.pcarstimeattackadfree.SessionFragment">
+
+    <TextView
+        android:id="@+id/session_lapnumber_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="16dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/medium_text"
+        android:background="@color/darkBg"
+        tools:text="Lap number"/>
+
+    <TextView
+        android:id="@+id/session_s1_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/medium_text"
+        tools:text="s1"/>
+
+    <TextView
+        android:id="@+id/session_s2_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/medium_text"
+        tools:text="s2"/>
+
+    <TextView
+        android:id="@+id/session_s3_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/medium_text"
+        tools:text="s3"/>
+
+    <TextView
+        android:id="@+id/session_laptime_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="center"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/medium_text"
+        android:background="@color/darkBg"
+        tools:text="Laptime"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="30"
+        android:gravity="center_vertical"
+        android:paddingEnd="6dp"
+        android:paddingStart="0dp">
+
+        <ProgressBar
+            android:id="@+id/progress_bar_gap"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0"
+            android:progressDrawable="@drawable/gap_progress_bar"
+            android:scaleY="100"/>
+
+        <TextView
+            android:id="@+id/list_item_gap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingEnd="10dp"
+            android:paddingStart="0dp"
+            android:textSize="@dimen/medium_text"
+            android:text="-"
+            android:textColor="@color/whiteText"/>
+    </RelativeLayout>
+
+</LinearLayout>

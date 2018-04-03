@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/darkBg">
+
+    <ImageView
+        android:id="@+id/layout_laptimes_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:padding="24dp"
+        android:contentDescription="@string/empty_list_view_description"
+        android:src="@mipmap/watch_icon"
+        android:tint="@color/empty_list_icon_tint"/>
+
+    <ListView
+        android:id="@+id/session_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="5dp"
+        android:fadeScrollbars="true"
+        android:scrollbarThumbVertical="@android:color/holo_blue_dark"
+        android:scrollbars="vertical"
+        android:stackFromBottom="true"
+        android:textSize="18sp"
+        android:typeface="monospace"
+        android:visibility="visible"/>
+</LinearLayout>

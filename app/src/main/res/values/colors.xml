@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3949AB</color>
+    <!--<color name="colorPrimaryDark">#283593</color>-->
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF5252</color>
+
+    <color name="bottom_bar_bg">#E0E0E0</color>
+    <color name="blackText">#212121</color>
+    <color name="darkBg">#111111</color>
+    <color name="listItemBgLight">#2e2e2e</color>
+    <color name="listItemBgDark">#212121</color>
+    <color name="listItemText">#CFCFCF</color>
+    <color name="waiting_car_track_info">#FFF176</color>
+    <color name="car_track_info_available">@color/grey_400</color>
+    <color name="red_200">#EF9A9A</color>
+    <color name="red_400">#EF5350</color>
+    <color name="red_600">#E53935</color>
+    <color name="indigo_400">#5C6BC0</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+    <color name="empty_list_icon_tint">#212121</color>
+    <color name="black">#000000</color>
+    <color name="gap_bg_color">#d93b3b</color>
+
+    <!-- Session fragment -->
+    <color name="invalidLap">#E53935</color>
+    <color name="whiteText">#CFCFCF</color>
+    <color name="bestTime">#43A047</color>
+    <color name="bestSector">#1B5E20</color>
+    <color name="transparentBg">#00000000</color>
+    <color name="record">#7E57C2</color>
+</resources>

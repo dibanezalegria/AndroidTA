@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">PCarsTA</string>
+    <string name="main_activity_title">Project CARS Time Attack</string>
+    <string name="edit_database_activity_title">Project CARS TimeAttack - Edit
+        database</string>
+    <string name="settings_activity_title">Project CARS Time Attack - Settings</string>
+    <string name="waiting_car_info">Waiting for car/track information. Continue
+        playing&#8230;</string>
+    <string name="waiting_car_info_long">Waiting for car/track. Laptime saved
+        for later processing. Continue playing&#8230;</string>
+    <string name="lite_version">Free version is limited to 3 car/track entries in the database.</string>
+    <string name="db_locked">Database can not be edited now. Exit to game\'s main menu.</string>
+    <string name="settings_locked">Settings can\'t not be accessed now. Exit to game\'s main menu
+        .</string>
+    <string name="empty_list_view_description">Empty list view background image</string>
+    <string name="restore_warning">WARNING: \n\nRestoring laptimes from file will remove
+        all your current laptimes in the database.\n\nAre you sure you want to continue?</string>
+    <string name="backup_ok">Backup completed successfully.</string>
+    <string name="backup_fail">Error: backup failed.</string>
+    <string name="restore_ok">Restore completed successfully.</string>
+    <string name="restore_fail">Error: restore failed.</string>
+
+    <!-- DBActivity -->
+    <string name="allow_access">Allow access to storage to be able to restore/backup laptimes.</string>
+
+    <!-- Preferences -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_sound_key">pref_sound_key</string>
+    <string name="pref_auto_key">pref_auto_broadcast_key</string>
+    <string name="pref_auto_title">Automatic network discovery</string>
+    <string name="pref_auto_summary">Enable or disable automatic broadcast address discovery</string>
+    <string name="pref_broadcast_key">pref_broadcast_key</string>
+    <string name="pref_broadcast_title">Broadcast address</string>
+    <string name="pref_broadcast_summary">Enter your network\'s broadcast address (only if
+        automatic discovery doesn\'t work)</string>
+    <string name="pref_default_broadcast">192.168.1.255</string>
+    <string name="pref_session_gap_key">pref_session_gap</string>
+    <string name="pref_session_gap_title">Maximum gap difference for chart in session tab</string>
+    <string name="pref_session_gap_summary">Recommended to set bigger gap for longer
+        tracks (Default: 15)</string>
+    <string name="pref_session_gap_default">15</string>
+
+    <!-- Menus -->
+    <string name="about_title">About</string>
+    <string
+        name="about"><![CDATA[<h2>About Project CARS</h2>Project CARS is a motorsport racing simulator
+        video game developed by Slightly Mad Studios and published and distributed by Bandai Namco Entertainment
+        .<br><br/><b>Project CARS Time Attack</b> is a companion app that aims to enhance the single player
+        experience. It compares and saves sector times, laptimes and time differences for different combinations
+        of cars and tracks.</p>]]>
+    </string>
+    <string
+        name="help"><![CDATA[<h2>Welcome to Project CARS Time Attack!</h2><p>pCARS-TA has two modes: Session and Live
+        Database.<br/><br/>Session shows a list of laptimes and sectors for each lap during a single session.
+        It highlights the best sectors, best laptime for the session and the all time record for the car/track
+        combination.<br/><br/>Live Database mode shows a list of all the records for the different car/track
+        combinations and the total number of laps for each combo. It allows you to sort the list by car, laptime or total number of laps
+        driven for each car/track. It also has an option to filter the list by car class. If one
+        track is selected, only laptimes for that specific track are shown (including a chart with time
+        differences). Live Database updates its content in real-time.</p><h3>Problems running pCARS-TA?</h3>
+        <p>These are a few things you could try:<br/><br/>1. Make sure your WiFi is on and connected to the same
+        network as your game console.<br/><br/>2. In game options/system, select UDP frequency 5 and UDP
+        <b>Protocol Project CARS 1</b>.<br/><br/>3. pCARS-TA uses your network\'s broadcast address to
+        communicate with the game. You can enter it manually in settings and deactivate the auto
+        mode if this automatic broadcast discovery is not working for your network.<br/><br/>4.<b>Important:</b>
+        Uninstalling the app will <u>delete all your records from the database!</u> In the full version there is an
+        option in the settings menu that helps you backup/restore the database to a file in the Downloads folder of
+        your device. This can also be used to transfer records between Android devices.<br/><br/>5. There is an option
+        in setting to delete laptimes from the database. This can not be accessed during a race session.<br/><br/>
+        6. One more thing, pCARS-TA just listens to the information that the game wants to share. Sometimes the car
+        and track information can take a few laps to show up. Do not worry, all your laptimes get stored in memory
+        until the car/track information is available. If the app loses focus, it loses the information for the session,
+        including the laps that were in memory waiting for the car/track information from the game.<br/><br/>Note about
+        <b>Reset Session</b>:
+        There are times when the app is not able to tell where the player is at in the game. For example, during replays or
+        when jumping from practice to qualifying and into the race. In those occasions we can use the option Reset Session
+        in the options menu. That will keep the track and car configuration but will reset the laptimes for the session.
+        <br/><br/>Enjoy!</p>]]>
+    </string>
+
+</resources>

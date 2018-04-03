@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/list_item_lap_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:paddingEnd="0dp"
+        android:paddingStart="8dp"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/list_item_lap_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:maxLines="1"
+        android:paddingEnd="0dp"
+        android:paddingStart="8dp"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+    <TextView
+        android:id="@+id/list_item_lap_car"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:maxLines="1"
+        android:paddingEnd="0dp"
+        android:paddingStart="8dp"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+    <TextView
+        android:id="@+id/list_item_lap_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:maxLines="1"
+        android:paddingEnd="0dp"
+        android:paddingStart="8dp"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+    <TextView
+        android:id="@+id/list_item_lap_nlaps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+    <TextView
+        android:id="@+id/list_item_lap_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:background="@drawable/delete_button"
+        android:text="DEL"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"/>
+
+</LinearLayout>
