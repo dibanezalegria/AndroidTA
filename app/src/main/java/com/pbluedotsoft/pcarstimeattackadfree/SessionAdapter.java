@@ -29,7 +29,7 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
     // [laptime, s1, s2, s3]
     private float[] mBest = {Float.MAX_VALUE, Float.MAX_VALUE, Float.MAX_VALUE, Float.MAX_VALUE};
     private float mSlowest = 0; // used for gap calculation
-    private float mRecord = Float.MAX_VALUE;
+    private Laptime mRecordLap;
 
 
     public SessionAdapter(@NonNull Context context, List<Laptime> lapList) {
@@ -91,7 +91,7 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
 
         if (lap.invalid) {
             lapTimeTV.setTextColor(ContextCompat.getColor(getContext(), R.color.invalidLap));
-        } else if (lap.time == mRecord) {
+        } else if (mRecordLap != null && lap.time == mRecordLap.time) {
             lapTimeTV.setTextColor(ContextCompat.getColor(getContext(), R.color.record));
         } else if (lap.time == mBest[0]) {
             lapTimeTV.setTextColor(ContextCompat.getColor(getContext(), R.color.bestTime));
@@ -108,16 +108,18 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
 
         lapTimeTV.setText(Laptime.format(lap.time));
 
-        // Highlight sectors only when more than one lap
-
         if (lap.s1 == 0)
             s1TV.setTypeface(Typeface.MONOSPACE);
         else
             s1TV.setTypeface(null, Typeface.NORMAL);
 
         s1TV.setText(Laptime.format(lap.s1));
-        if (lap.s1 == mBest[1] && !lap.invalid && getCount() > 1) {
-            s1TV.setBackgroundResource(R.color.bestSector);
+        if (lap.s1 == mBest[1] && !lap.invalid) {
+            if (mRecordLap != null && lap.s1 > 0 && lap.s1 <= mRecordLap.s1) {
+                s1TV.setBackgroundResource(R.color.record);
+            } else {
+                s1TV.setBackgroundResource(R.color.bestSector);
+            }
         } else {
             s1TV.setBackgroundResource(rowBgColor);
         }
@@ -128,8 +130,12 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
             s2TV.setTypeface(null, Typeface.NORMAL);
 
         s2TV.setText(Laptime.format(lap.s2));
-        if (lap.s2 == mBest[2] && !lap.invalid && getCount() > 1) {
-            s2TV.setBackgroundResource(R.color.bestSector);
+        if (lap.s2 == mBest[2] && !lap.invalid) {
+            if (mRecordLap != null && lap.s2 > 0 && lap.s2 <= mRecordLap.s2) {
+                s2TV.setBackgroundResource(R.color.record);
+            } else {
+                s2TV.setBackgroundResource(R.color.bestSector);
+            }
         } else {
             s2TV.setBackgroundResource(rowBgColor);
         }
@@ -140,8 +146,12 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
             s3TV.setTypeface(null, Typeface.NORMAL);
 
         s3TV.setText(Laptime.format(lap.s3));
-        if (lap.s3 == mBest[3] && !lap.invalid && getCount() > 1) {
-            s3TV.setBackgroundResource(R.color.bestSector);
+        if (lap.s3 == mBest[3] && !lap.invalid) {
+            if (mRecordLap != null && lap.s3 > 0 && lap.s3 <= mRecordLap.s3) {
+                s3TV.setBackgroundResource(R.color.record);
+            } else {
+                s3TV.setBackgroundResource(R.color.bestSector);
+            }
         } else {
             s3TV.setBackgroundResource(rowBgColor);
         }
@@ -160,13 +170,12 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
             progressPercentage = 0;
             gapTV.setText("-");
         } else if (lap.invalid) {
-            gapTV.setText("-invalid-");
+            gapTV.setText("invalid");
             bar.setProgressDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.gap_progress_bar_dark));
-            gapTV.setTextColor(ContextCompat.getColor(getContext(), R.color.invalidLap));
+                    R.drawable.gap_progress_bar_invalid));
             gapTV.setGravity(Gravity.CENTER);
-            progressPercentage = 0;
-        } else if (lap.time == mRecord) {
+            progressPercentage = 100;
+        } else if (mRecordLap != null && lap.time == mRecordLap.time) {
             bar.setProgressDrawable(ContextCompat.getDrawable(getContext(),
                     R.drawable.gap_progress_bar_record));
             gapTV.setText("new record");
@@ -201,8 +210,8 @@ public class SessionAdapter extends ArrayAdapter<Laptime> {
     /**
      * Method called by MainActivity via SessionFragment helps highlighting record laptime.
      */
-    public void setRecord(float record) {
-        mRecord = record;
+    public void setRecord(Laptime recordLap) {
+        mRecordLap = recordLap;
 //        Log.d(TAG, "setRecord: " + Laptime.format(record));
     }
 

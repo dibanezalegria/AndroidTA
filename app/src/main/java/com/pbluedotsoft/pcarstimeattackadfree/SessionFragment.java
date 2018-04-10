@@ -23,7 +23,7 @@ public class SessionFragment extends Fragment {
     private static final String TAG = SessionFragment.class.getSimpleName();
     private static SessionFragment mInstance;
     private ListView mListView;
-    private float mRecord;          // record lap gets passed to adapter when updating adapter
+    private Laptime mRecordLap;     // record lap gets passed to adapter when updating adapter
     private int mMaxGap;            // maximum gap for gap chart
 
     // Empty constructor
@@ -66,8 +66,8 @@ public class SessionFragment extends Fragment {
      */
     public void update(ArrayAdapter<Laptime> adapter) {
         ((SessionAdapter) adapter).setMaxGap(mMaxGap);
-        if (mRecord > 0) {
-            ((SessionAdapter) adapter).setRecord(mRecord);
+        if (mRecordLap != null) {
+            ((SessionAdapter) adapter).setRecord(mRecordLap);
         }
         if (mListView != null) {
             mListView.setAdapter(adapter);
@@ -78,8 +78,8 @@ public class SessionFragment extends Fragment {
     /**
      * Updates record in SessionAdapter and invalidates mListView (refresh).
      */
-    public void setRecord(float record) {
-        mRecord = record;
+    public void setRecord(Laptime recordLap) {
+        mRecordLap = recordLap;
         // Late 1347 will update a buffered list of laptimes, one of them could be a record.
         // If we do not force mListView to refresh, it might continue showing laptime as best in
         // session instead of all time record.
@@ -87,7 +87,7 @@ public class SessionFragment extends Fragment {
         if (mListView != null) {
             SessionAdapter adapter = (SessionAdapter) mListView.getAdapter();
             if (adapter != null) {
-                adapter.setRecord(record);
+                adapter.setRecord(recordLap);
                 FragmentActivity activity = getActivity();
                 if (activity != null) {
                     activity.runOnUiThread(new Runnable() {
