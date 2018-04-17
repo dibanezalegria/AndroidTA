@@ -1,5 +1,6 @@
 package com.pbluedotsoft.pcarstimeattackadfree;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.AppCompatSpinner;
@@ -89,6 +91,7 @@ public class LiveDbFragment extends Fragment implements LoaderManager
         return mInstance;
     }
 
+    @SuppressLint("RestrictedApi")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -113,6 +116,8 @@ public class LiveDbFragment extends Fragment implements LoaderManager
         // Spinners
         //
         mTrackSpinner = view.findViewById(R.id.track_spinner);
+        mTrackSpinner.setSupportBackgroundTintList(ContextCompat.getColorStateList(getContext(),
+                R.color.indigo_300));
         mTrackSpinnerCursorAdapter = new TrackSpinnerCursorAdapter(getContext(), null);
         mTrackSpinner.setAdapter(mTrackSpinnerCursorAdapter);
         mTrackSpinner.setOnItemSelectedListener(this);
@@ -120,6 +125,8 @@ public class LiveDbFragment extends Fragment implements LoaderManager
         getActivity().getSupportLoaderManager().initLoader(TRACK_LOADER, null, this);
 
         mCarClassSpinner = view.findViewById(R.id.car_class_spinner);
+        mCarClassSpinner.setSupportBackgroundTintList(ContextCompat.getColorStateList(getContext(),
+                R.color.indigo_300));
         mClassSpinnerCursorAdapter = new ClassSpinnerCursorAdapter(getContext(), null);
         mCarClassSpinner.setAdapter(mClassSpinnerCursorAdapter);
         mCarClassSpinner.setOnItemSelectedListener(this);

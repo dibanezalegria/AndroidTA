@@ -14,12 +14,12 @@ public class PagerAdapterFragment extends FragmentPagerAdapter {
 
     private static final String TAG = PagerAdapterFragment.class.getSimpleName();
 
-    private static final int PAGE_COUNT = 2;
+    private static final int PAGE_COUNT = 3;
     private final String[] mTabTitles;
 
     public PagerAdapterFragment(FragmentManager fm) {
         super(fm);
-        mTabTitles = new String[] { "Session", "Live Database" };
+        mTabTitles = new String[] { "Session", "Live Database", "Ghost" };
     }
 
     @Override
@@ -30,6 +30,8 @@ public class PagerAdapterFragment extends FragmentPagerAdapter {
                 return SessionFragment.getInstance();
             case 1:
                 return LiveDbFragment.getInstance();
+            case 2:
+                return GhostFragment.getInstance();
         }
         return null;
     }

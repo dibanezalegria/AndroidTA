@@ -78,4 +78,14 @@
         <br/><br/>Enjoy!</p>]]>
     </string>
 
+    <!-- Spinner A in GhostFragment -->
+    <string-array name="spinner_values">
+        <item>LAST</item>
+        <item>BEST</item>
+        <item>RECORD</item>
+    </string-array>
+
+    <!-- Spinner B in GhostFragment -->
+    <string name="waiting">Waiting for car/track info</string>
+
 </resources>

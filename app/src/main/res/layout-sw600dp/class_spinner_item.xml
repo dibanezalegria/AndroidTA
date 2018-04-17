@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:textSize="@dimen/small_text"
-        android:textColor="#7986CB"
+        android:textColor="@color/indigo_300"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:paddingLeft="6dp"

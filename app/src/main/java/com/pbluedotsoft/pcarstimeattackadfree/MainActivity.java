@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private SessionFragment mSessionFragment;
     private LiveDbFragment mLiveDbFragment;
+    private GhostFragment mGhostFragment;
 
     // DEBUG
     private int packetCounter = 0;
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         // References to fragments
         mSessionFragment = SessionFragment.getInstance();
         mLiveDbFragment = LiveDbFragment.getInstance();
+        mGhostFragment = GhostFragment.getInstance();
 
         mNLapTV = findViewById(R.id.info_nlap_tv);
         mRecordTV = findViewById(R.id.info_record_tv);
@@ -369,6 +371,8 @@ public class MainActivity extends AppCompatActivity {
                         // Pass car/track info to LapCursorAdapters via LiveDbFragment
                         mLiveDbFragment.informCursorAdapters(mParser47.car, mParser47.track,
                                 mParser.lastLap);
+                        // Pass car/track to GhostFragment
+                        mGhostFragment.setCarTrackCombo(mParser47.car, mParser47.track);
                     }
                     break;
 
@@ -632,13 +636,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Update session
+     * Update session and ghost fragments.
      */
     private void updateSession() {
         List<Laptime> laps = new ArrayList<>(mLapMap.values());
         SessionAdapter adapter = new SessionAdapter(getApplicationContext(), laps);
         mSessionFragment.update(adapter);
-//                        Log.d(TAG, "updateSession: mSessionFragment adapter updated.");
+
+        // Inform GhostFragment
+        mGhostFragment.updateLapList(mParser.lapNum, mLapMap);
     }
 
     /**
@@ -651,8 +657,10 @@ public class MainActivity extends AppCompatActivity {
         mLapMap = new TreeMap<>();
         // Inform adapters that car/track is unknown (highlight purposes)
         mLiveDbFragment.informCursorAdapters(null, null, 0);
-        // Inform fragment that record is unknown (highlight purposes)
+        // Inform SessionFragment that record is unknown (highlight purposes)
         mSessionFragment.setRecord(null);
+        // Reset GhostFragment session
+        mGhostFragment.hardReset();
         // GUI reset
         mNLapTV.setText("-");
         mCarTrackComboTV.setText(getResources().getString(R.string.waiting_car_info));
@@ -674,6 +682,8 @@ public class MainActivity extends AppCompatActivity {
         mLapMap = new TreeMap<>();
         // GUI reset
         mNLapTV.setText("-");
+        // Reset GhostFragment session
+        mGhostFragment.softReset();
 //        Log.d(TAG, "--------------------- SOFT reset");
     }
 
