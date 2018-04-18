@@ -3,7 +3,7 @@ package com.pbluedotsoft.pcarstimeattackadfree;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,9 +26,7 @@ import android.widget.TextView;
 import com.pbluedotsoft.pcarstimeattackadfree.data.LapContract;
 import com.pbluedotsoft.pcarstimeattackadfree.data.LapContract.LapEntry;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
@@ -68,7 +66,6 @@ public class GhostFragment extends Fragment implements LoaderManager
     private AppCompatSpinner mGhostSpinnerA;
     private AppCompatSpinner mGhostSpinnerB;
 
-
     /**
      * Fragment
      */
@@ -84,6 +81,8 @@ public class GhostFragment extends Fragment implements LoaderManager
      */
     private int mActualLap;
 
+
+
     public GhostFragment() {
         mCur = new TextView[4];
         mGhostA = new TextView[4];
@@ -94,7 +93,6 @@ public class GhostFragment extends Fragment implements LoaderManager
 
     public static GhostFragment getInstance() {
         if (mInstance == null) {
-//            Log.d(TAG, "getInstance()");
             mInstance = new GhostFragment();
         }
         return mInstance;
@@ -103,9 +101,12 @@ public class GhostFragment extends Fragment implements LoaderManager
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Log.d(TAG, "onCreate");
     }
 
+    /**
+     * RestrictedApi removes warning from setSupportBackgroundTintList
+     *
+     */
     @SuppressLint("RestrictedApi")
     @Nullable
     @Override
@@ -171,7 +172,6 @@ public class GhostFragment extends Fragment implements LoaderManager
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        Log.d(TAG, "OnDestroyView");
     }
 
     /**
@@ -200,22 +200,26 @@ public class GhostFragment extends Fragment implements LoaderManager
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         switch (loader.getId()) {
             case GHOST_LOADER:
+                int counter = 0;
+                int index = -1;
+                // MatrixCursor seems to need a projection with id
                 String[] projection = {LapContract.LapEntry._ID, LapContract.LapEntry
                         .COLUMN_LAP_CAR};
-                MatrixCursor newCursor = new MatrixCursor(projection); // Same project as in loader
+                MatrixCursor newCursor = new MatrixCursor(projection);
                 if (cursor.getCount() > 0) {
                     if (cursor.moveToFirst()) {
+                        mGhostSpinnerCursorAdapter.setActualCar(mActualCar);    // highlight
                         do {
-                            // fix: filter out tracks for when track is not yet available
-                            if ((cursor.getString(cursor.getColumnIndex(LapContract.LapEntry
-                                    .COLUMN_LAP_TRACK)).equals(mActualTrack))) {
+                            String car = cursor.getString(cursor.getColumnIndex(LapContract.LapEntry
+                                    .COLUMN_LAP_CAR));
+                            if (car.equals(mActualCar))
+                                index = counter;
 
-                                newCursor.addRow(new Object[]{
-                                        cursor.getInt(cursor.getColumnIndex(LapContract.LapEntry._ID)),
-                                        cursor.getString(cursor.getColumnIndex(LapContract.LapEntry
-                                                .COLUMN_LAP_CAR))
-                                });
-                            }
+                            newCursor.addRow(new Object[]{
+                                    cursor.getInt(cursor.getColumnIndex(LapContract.LapEntry._ID)),
+                                    car
+                            });
+                            counter++;
                         } while (cursor.moveToNext());
                     }
                 } else {
@@ -223,6 +227,10 @@ public class GhostFragment extends Fragment implements LoaderManager
                 }
 
                 mGhostSpinnerCursorAdapter.swapCursor(newCursor);
+
+                // Highlight actual car
+                if (index > -1)
+                    mGhostSpinnerB.setSelection(index);
         }
     }
 
@@ -266,20 +274,33 @@ public class GhostFragment extends Fragment implements LoaderManager
             return;
 
         switch(ghostID) {
-            case 0: {
+            case 0:
+                // Spinner A
                 if (mGhostSpinnerA == null || mGhostSpinnerA.getSelectedItem() == null)
                     return;
-                String item = mGhostSpinnerA.getSelectedItem().toString();
-                if (item.equals("BEST")) {
-                    // Best lap
-                    float bestLap = Float.MAX_VALUE;
-                    float[] ftimes = new float[4];
-                    for (Map.Entry<Integer, Laptime> entry : mLapMap.entrySet()) {
-                        int lapNum = entry.getKey();
-                        Laptime lap = entry.getValue();
-                        Laptime next = mLapMap.get(lapNum + 1);
-                        if (next != null && next.s1 > 0) {
-                            if (!lap.invalid && lap.time < bestLap) {
+
+                switch (mGhostSpinnerA.getSelectedItem().toString()) {
+                    case "LAST":
+                        // Last lap
+                        Laptime last = mLapMap.get(mActualLap - 1);
+                        if (last == null)
+                            return;
+
+                        if (last.time > 0)
+                            for (int i = 0; i < 4; i++)
+                                mGhostA[i].setTypeface(null, Typeface.NORMAL);
+
+                        mGhostA[0].setText(Laptime.format(last.time));
+                        mGhostA[1].setText(Laptime.format(last.s1));
+                        mGhostA[2].setText(Laptime.format(last.s2));
+                        mGhostA[3].setText(Laptime.format(last.s3));
+                        break;
+                    case "BEST":
+                        // Best lap
+                        float bestLap = Float.MAX_VALUE;
+                        float[] ftimes = new float[4];
+                        for (Laptime lap : mLapMap.values()) {
+                            if (!lap.invalid && lap.time < bestLap && lap.time > 0) {
                                 bestLap = lap.time;
                                 ftimes[0] = lap.time;
                                 ftimes[1] = lap.s1;
@@ -287,84 +308,58 @@ public class GhostFragment extends Fragment implements LoaderManager
                                 ftimes[3] = lap.s3;
                             }
                         }
-                    }
 
-                    mGhostA[0].setText(Laptime.format(ftimes[0]));
-                    mGhostA[1].setText(Laptime.format(ftimes[1]));
-                    mGhostA[2].setText(Laptime.format(ftimes[2]));
-                    mGhostA[3].setText(Laptime.format(ftimes[3]));
+                        if (bestLap < Float.MAX_VALUE)
+                            for (int i = 0; i < 4; i++)
+                                mGhostA[i].setTypeface(null, Typeface.NORMAL);
 
-                } else if (item.equals("LAST")) {
-                    // Last lap
-                    Laptime cur = mLapMap.get(mActualLap);
-                    Laptime last = mLapMap.get(mActualLap - 1);
-                    Laptime prev = mLapMap.get(mActualLap - 2);
-                    if (cur == null || last == null)
-                        return;
-
-                    // Show last lap only when current has already crossed T1
-                    if (cur.s1 > 0) {
-                        mGhostA[0].setText(Laptime.format(last.time));
-                        mGhostA[1].setText(Laptime.format(last.s1));
-                        mGhostA[2].setText(Laptime.format(last.s2));
-                        mGhostA[3].setText(Laptime.format(last.s3));
-                    } else {
-                        if (prev != null) {
-                            mGhostA[0].setText(Laptime.format(prev.time));
-                            mGhostA[1].setText(Laptime.format(prev.s1));
-                            mGhostA[2].setText(Laptime.format(prev.s2));
-                            mGhostA[3].setText(Laptime.format(prev.s3));
-                        } else {
-                            mGhostA[0].setText("--:--:---");
-                            mGhostA[1].setText("--:--:---");
-                            mGhostA[2].setText("--:--:---");
-                            mGhostA[3].setText("--:--:---");
-                        }
-                    }
-
-                } else if (item.equals("RECORD")) {
-                    // Record lap
-                    if (mActualCar == null) {
-                        mGhostA[0].setText("--:--:--");
-                        mGhostA[1].setText("--:--:--");
-                        mGhostA[2].setText("--:--:--");
-                        mGhostA[3].setText("--:--:--");
-                        return;
-                    }
-
-                    String selection = LapEntry.COLUMN_LAP_TRACK + " LIKE ? AND " +
-                            LapEntry.COLUMN_LAP_CAR + " LIKE ?";
-                    String[] selArgs = new String[]{mActualTrack, mActualCar};
-                    Cursor cursor = getActivity().getContentResolver().query(LapEntry.CONTENT_URI,
-                            null,
-                            selection,
-                            selArgs,
-                            null);
-
-                    float[] ftimes = new float[4];
-                    if (cursor != null && cursor.getCount() > 0) {
-                        cursor.moveToFirst();
-                        ftimes[0] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_TIME));
-                        ftimes[1] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S1));
-                        ftimes[2] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S2));
-                        ftimes[3] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S3));
-                    }
-                    if (cursor != null && !cursor.isClosed())
-                        cursor.close();
-
-                    // Update after T1 instead of crossing line (gives time to see differences)
-                    Laptime cur = mLapMap.get(mActualLap);
-                    if (cur != null && cur.s1 > 0) {
                         mGhostA[0].setText(Laptime.format(ftimes[0]));
                         mGhostA[1].setText(Laptime.format(ftimes[1]));
                         mGhostA[2].setText(Laptime.format(ftimes[2]));
                         mGhostA[3].setText(Laptime.format(ftimes[3]));
-                    }
+                        break;
+                    case "RECORD":
+                        // Record lap
+                        if (mActualCar == null) {
+                            for (int i = 0; i < 4; i++) {
+                                mGhostA[i].setTypeface(Typeface.MONOSPACE);
+                                mGhostA[i].setText("--:--:---");
+                            }
+                            return;
+                        }
+
+                        String selection = LapEntry.COLUMN_LAP_TRACK + " LIKE ? AND " +
+                                LapEntry.COLUMN_LAP_CAR + " LIKE ?";
+                        String[] selArgs = new String[]{mActualTrack, mActualCar};
+                        Cursor cursor = getActivity().getContentResolver().query(LapEntry.CONTENT_URI,
+                                null,
+                                selection,
+                                selArgs,
+                                null);
+
+                        ftimes = new float[4];
+                        if (cursor != null && cursor.getCount() > 0) {
+                            cursor.moveToFirst();
+                            ftimes[0] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_TIME));
+                            ftimes[1] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S1));
+                            ftimes[2] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S2));
+                            ftimes[3] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S3));
+                            for (int i = 0; i < 4; i++)
+                                mGhostA[i].setTypeface(null, Typeface.NORMAL);
+                        }
+                        if (cursor != null && !cursor.isClosed())
+                            cursor.close();
+
+                        mGhostA[0].setText(Laptime.format(ftimes[0]));
+                        mGhostA[1].setText(Laptime.format(ftimes[1]));
+                        mGhostA[2].setText(Laptime.format(ftimes[2]));
+                        mGhostA[3].setText(Laptime.format(ftimes[3]));
+                        break;
                 }
-            }
                 break;
-            case 1: {
-                // Spinner might not be ready when first call from MainActivity (fix)
+
+            case 1:
+                // Spinner B
                 if (mGhostSpinnerB == null || mGhostSpinnerB.getSelectedItem() == null ||
                         mGhostSpinnerB.getSelectedItem().toString()
                                 .equals(getString(R.string.waiting))) {
@@ -390,20 +385,19 @@ public class GhostFragment extends Fragment implements LoaderManager
                     ftimes[1] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S1));
                     ftimes[2] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S2));
                     ftimes[3] = cursor.getFloat(cursor.getColumnIndex(LapEntry.COLUMN_LAP_S3));
+                    for (int i = 0; i < 4; i++)
+                        mGhostB[i].setTypeface(null, Typeface.NORMAL);
                 }
                 if (cursor != null && !cursor.isClosed())
                     cursor.close();
 
-                // Update after T1 instead of crossing line (gives time to see differences)
-                Laptime cur = mLapMap.get(mActualLap);
-                if (cur != null && cur.s1 > 0) {
-                    mGhostB[0].setText(Laptime.format(ftimes[0]));
-                    mGhostB[1].setText(Laptime.format(ftimes[1]));
-                    mGhostB[2].setText(Laptime.format(ftimes[2]));
-                    mGhostB[3].setText(Laptime.format(ftimes[3]));
-                }
-            }
+                mGhostB[0].setText(Laptime.format(ftimes[0]));
+                mGhostB[1].setText(Laptime.format(ftimes[1]));
+                mGhostB[2].setText(Laptime.format(ftimes[2]));
+                mGhostB[3].setText(Laptime.format(ftimes[3]));
+
                 break;
+
             case 2:
                 updateGhost(0);
                 updateGhost(1);
@@ -440,6 +434,9 @@ public class GhostFragment extends Fragment implements LoaderManager
         mLapNumTV.setText("CURRENT LAP");
 
         for (int i = 0; i < 4; i++) {
+            mCur[i].setTypeface(Typeface.MONOSPACE);
+            mGhostA[i].setTypeface(Typeface.MONOSPACE);
+            mGhostB[i].setTypeface(Typeface.MONOSPACE);
             mCur[i].setText("--:--:---");
             mGhostA[i].setText("--:--:---");
             mGhostB[i].setText("--:--:---");
@@ -474,35 +471,58 @@ public class GhostFragment extends Fragment implements LoaderManager
     public void updateLapList(int lapNum, TreeMap<Integer, Laptime> lapMap) {
         mActualLap = lapNum;
         mLapMap = lapMap;
-        Laptime currLap = lapMap.get(lapNum);
+        final Laptime currLap = lapMap.get(lapNum);
         final Laptime prevLap = lapMap.get(lapNum - 1);
+
         //
         // Update current lap
         //
         if (currLap == null)
             return;
 
-        if (currLap.s1 == 0) {
-            if (prevLap != null) {
-                mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s", prevLap.lapNum));
-                mCur[0].setText(Laptime.format(prevLap.time));
-                mCur[1].setText(Laptime.format(prevLap.s1));
-                mCur[2].setText(Laptime.format(prevLap.s2));
-                mCur[3].setText(Laptime.format(prevLap.s3));
-            }
-        } else {
-            // Current lap
-            mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s", currLap.lapNum));
-            mCur[0].setText(Laptime.format(currLap.time));
+        if (currLap.s1 > 0 && currLap.s2 == 0) {
+            mCur[1].setTypeface(null, Typeface.NORMAL);
             mCur[1].setText(Laptime.format(currLap.s1));
+
+        } else if (currLap.s2 > 0 && currLap.s3 == 0) {
+            mCur[2].setTypeface(null, Typeface.NORMAL);
             mCur[2].setText(Laptime.format(currLap.s2));
-            mCur[3].setText(Laptime.format(currLap.s3));
+
+        } else if (currLap.s1 == 0) {
+            if (prevLap != null) {
+                mCur[3].setTypeface(null, Typeface.NORMAL);
+                mCur[0].setTypeface(null, Typeface.NORMAL);
+                mCur[3].setText(Laptime.format(prevLap.s3));
+                mCur[0].setText(Laptime.format(prevLap.time));
+                // Show sectors, laptime and gaps for 10s before clearing TextViews
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s",
+                                        currLap.lapNum));
+                                for (int i = 0; i < 4; i++) {
+                                    mCur[i].setTypeface(Typeface.MONOSPACE);
+                                    mCur[i].setText("--:--:---");
+                                }
+                                updateGhost(2);
+                                updateGaps(2);      // reset gaps
+                            }
+                        });
+                    }
+                }, 10000);   // 10s
+            } else {
+                mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s",
+                        currLap.lapNum));
+            }
         }
 
         //
-        // Notify ghosts and gaps
+        // Gaps
         //
-        updateGhost(2);
         updateGaps(2);
     }
 

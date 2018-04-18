@@ -8,7 +8,7 @@
     android:textColor="@color/indigo_300"
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
-    android:paddingStart="24dp"
+    android:paddingStart="12dp"
     android:paddingEnd="6dp"
     android:gravity="start"
     />

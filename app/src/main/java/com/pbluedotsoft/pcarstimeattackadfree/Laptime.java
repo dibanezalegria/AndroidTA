@@ -16,6 +16,10 @@ public class Laptime {
     public Laptime(int num) {
         lapNum = num;
         invalid = false;
+        time = 0;
+        s1 = 0;
+        s2 = 0;
+        s3 = 0;
     }
 
     public Laptime(int num, float[] laptime, boolean novalid) {
@@ -98,6 +102,30 @@ public class Laptime {
     public boolean isGood() {
         return s1 > 0 && s2 > 0 && s3 > 0 && time > 0 && !invalid;
     }
+
+//    /**
+//     * Overriding equals() to compare Laptimes
+//     *
+//     * @param obj - Laptime object
+//     * @return - true if equal
+//     */
+//    public boolean equals(Object obj) {
+//        if (obj == this)
+//            return true;
+//
+//        if (!(obj instanceof Laptime))
+//            return false;
+//
+//        if (lapNum == ((Laptime) obj).lapNum &&
+//                time == ((Laptime) obj).time &&
+//                s1 == ((Laptime) obj).s1 &&
+//                s2 == ((Laptime) obj).s2 &&
+//                s3 == ((Laptime) obj).s3 &&
+//                invalid == ((Laptime) obj).invalid)
+//            return true;
+//
+//        return false;
+//    }
 
     @Override
     public String toString() {

@@ -529,8 +529,8 @@ public class MainActivity extends AppCompatActivity {
          * @param laptime - needed for processBufferedLaps for delayed laptime processing.
          */
         private boolean databaseUpdate(Laptime laptime) {
-            // Laptime validation (invalid laps get filtered out)
-            if (!laptime.isGood())
+            // Crash fix released version 1.0.2: check mParser47
+            if (!laptime.isGood() || mParser47.track == null || mParser47.car == null)
                 return false;
 
             String selection = LapEntry.COLUMN_LAP_TRACK + " LIKE ? AND " +

@@ -2,4 +2,6 @@
 <resources>
     <dimen name="small_text">16sp</dimen>
     <dimen name="medium_text">18sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+    <dimen name="xlarge_text">22sp</dimen>
 </resources>

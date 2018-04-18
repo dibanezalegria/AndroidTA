@@ -57,7 +57,9 @@
         combinations and the total number of laps for each combo. It allows you to sort the list by car, laptime or total number of laps
         driven for each car/track. It also has an option to filter the list by car class. If one
         track is selected, only laptimes for that specific track are shown (including a chart with time
-        differences). Live Database updates its content in real-time.</p><h3>Problems running pCARS-TA?</h3>
+        differences). Live Database updates its content in real-time.<br/><br/>Ghost mode shows sector and laptime
+        differences between your current lap and your last, best or record lap, or any other record in your database in real time.</p>
+        <h3>Problems running pCARS-TA?</h3>
         <p>These are a few things you could try:<br/><br/>1. Make sure your WiFi is on and connected to the same
         network as your game console.<br/><br/>2. In game options/system, select UDP frequency 5 and UDP
         <b>Protocol Project CARS 1</b>.<br/><br/>3. pCARS-TA uses your network\'s broadcast address to

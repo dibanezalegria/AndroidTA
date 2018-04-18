@@ -2,6 +2,7 @@ package com.pbluedotsoft.pcarstimeattackadfree;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.pbluedotsoft.pcarstimeattackadfree.data.LapContract.LapEntry;
  */
 public class GhostSpinnerCursorAdapter extends CursorAdapter {
 
+    private String mActualCar;
+
 
     public GhostSpinnerCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -24,7 +27,6 @@ public class GhostSpinnerCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.ghost_spinner_item, parent, false);
-
     }
 
     @Override
@@ -33,5 +35,16 @@ public class GhostSpinnerCursorAdapter extends CursorAdapter {
         int carColIndex = cursor.getColumnIndex(LapEntry.COLUMN_LAP_CAR);
         String name = cursor.getString(carColIndex);
         ghostNameTv.setText(name);
+        if (name.equals(mActualCar)) {
+            ghostNameTv.setTextColor(ContextCompat.getColor(context, R.color.indigo_100));
+        }
+     }
+
+    /**
+     *
+     * @param car - actual car
+     */
+    public void setActualCar(String car) {
+        mActualCar = car;
     }
 }

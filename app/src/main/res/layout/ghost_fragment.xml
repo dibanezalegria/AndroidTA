@@ -13,12 +13,12 @@
         android:background="@color/black"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="12dp">
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/ghost_spinnerA"
             android:layout_width="0dp"
-            android:layout_weight="28"
+            android:layout_weight="30"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:popupBackground="@color/darkerBg"/>
@@ -39,7 +39,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s1"/>
 
@@ -56,7 +56,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s2"/>
 
@@ -71,14 +71,9 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s3"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/ghostA_laptime_tv"
@@ -93,14 +88,10 @@
             android:layout_marginEnd="6dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="Laptime"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!-- GAP A -->
@@ -115,7 +106,7 @@
         <TextView
             android:text=""
             android:layout_width="0dp"
-            android:layout_weight="28"
+            android:layout_weight="30"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:gravity="center"/>
@@ -136,7 +127,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s1"/>
 
@@ -153,7 +144,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s2"/>
 
@@ -168,14 +159,9 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s3"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/gapA_laptime_tv"
@@ -190,14 +176,10 @@
             android:layout_marginEnd="6dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="Laptime"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!-- CURRENT LAP -->
@@ -213,13 +195,13 @@
             android:id="@+id/lap_num_tv"
             android:text="CURRENT LAP"
             android:layout_width="0dp"
-            android:layout_weight="28"
+            android:layout_weight="30"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/whiteText"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:gravity="start"
-            android:textSize="@dimen/small_text"
-            android:textColor="@color/whiteText"
-            android:paddingStart="24dp"
+            android:paddingStart="12dp"
             android:paddingEnd="6dp"/>
 
         <TextView
@@ -238,7 +220,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s1"/>
 
@@ -255,7 +237,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s2"/>
 
@@ -270,14 +252,9 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s3"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/current_laptime_tv"
@@ -292,14 +269,10 @@
             android:layout_marginEnd="6dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="Laptime"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!-- GAP B -->
@@ -314,7 +287,7 @@
         <TextView
             android:text=""
             android:layout_width="0dp"
-            android:layout_weight="28"
+            android:layout_weight="30"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:gravity="center"/>
@@ -335,7 +308,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s1"/>
 
@@ -352,7 +325,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s2"/>
 
@@ -367,14 +340,9 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s3"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/gapB_laptime_tv"
@@ -389,14 +357,10 @@
             android:layout_marginEnd="6dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="Laptime"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!-- GHOST B -->
@@ -411,7 +375,7 @@
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/ghost_spinnerB"
             android:layout_width="0dp"
-            android:layout_weight="28"
+            android:layout_weight="30"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:popupBackground="@color/darkerBg"/>
@@ -432,7 +396,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s1"/>
 
@@ -449,7 +413,7 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s2"/>
 
@@ -464,14 +428,9 @@
             android:paddingStart="5dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="s3"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/ghostB_laptime_tv"
@@ -486,14 +445,10 @@
             android:layout_marginEnd="6dp"
             android:gravity="center"
             android:textColor="@color/whiteText"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/medium_text"
             android:maxLines="1"
             tools:text="Laptime"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </LinearLayout>

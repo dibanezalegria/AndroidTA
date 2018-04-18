@@ -13,7 +13,7 @@
         android:background="@color/black"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="36dp">
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/ghost_spinnerA"
@@ -215,10 +215,10 @@
             android:layout_width="0dp"
             android:layout_weight="28"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text"
+            android:textColor="@color/whiteText"
             android:maxLines="1"
             android:gravity="start"
-            android:textSize="@dimen/small_text"
-            android:textColor="@color/whiteText"
             android:paddingStart="24dp"
             android:paddingEnd="6dp"/>
 
