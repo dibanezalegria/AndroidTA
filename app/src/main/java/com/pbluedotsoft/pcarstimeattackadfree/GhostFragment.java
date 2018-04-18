@@ -81,6 +81,11 @@ public class GhostFragment extends Fragment implements LoaderManager
      */
     private int mActualLap;
 
+    /**
+     * GhostB selects actual car only the first time the spinner gets populated
+     */
+    private boolean mFirstTimeSelectionDone;
+
 
 
     public GhostFragment() {
@@ -229,8 +234,10 @@ public class GhostFragment extends Fragment implements LoaderManager
                 mGhostSpinnerCursorAdapter.swapCursor(newCursor);
 
                 // Highlight actual car
-                if (index > -1)
+                if (index > -1 && !mFirstTimeSelectionDone) {
                     mGhostSpinnerB.setSelection(index);
+                    mFirstTimeSelectionDone = true;
+                }
         }
     }
 
@@ -270,9 +277,6 @@ public class GhostFragment extends Fragment implements LoaderManager
      * @param ghostID - 0 updates ghostA TextViews, 1 updates ghostB TextViews
      */
     private void updateGhost(int ghostID) {
-        if (mLapMap == null)
-            return;
-
         switch(ghostID) {
             case 0:
                 // Spinner A
@@ -280,8 +284,11 @@ public class GhostFragment extends Fragment implements LoaderManager
                     return;
 
                 switch (mGhostSpinnerA.getSelectedItem().toString()) {
-                    case "LAST":
+                    case "LAST LAP":
                         // Last lap
+                        if (mLapMap == null)
+                            return;
+
                         Laptime last = mLapMap.get(mActualLap - 1);
                         if (last == null)
                             return;
@@ -295,8 +302,11 @@ public class GhostFragment extends Fragment implements LoaderManager
                         mGhostA[2].setText(Laptime.format(last.s2));
                         mGhostA[3].setText(Laptime.format(last.s3));
                         break;
-                    case "BEST":
+                    case "BEST IN SESSION":
                         // Best lap
+                        if (mLapMap == null)
+                            return;
+
                         float bestLap = Float.MAX_VALUE;
                         float[] ftimes = new float[4];
                         for (Laptime lap : mLapMap.values()) {
@@ -318,7 +328,7 @@ public class GhostFragment extends Fragment implements LoaderManager
                         mGhostA[2].setText(Laptime.format(ftimes[2]));
                         mGhostA[3].setText(Laptime.format(ftimes[3]));
                         break;
-                    case "RECORD":
+                    case "ALL TIME BEST":
                         // Record lap
                         if (mActualCar == null) {
                             for (int i = 0; i < 4; i++) {
@@ -418,6 +428,8 @@ public class GhostFragment extends Fragment implements LoaderManager
         if (getActivity() != null) {
             getActivity().getSupportLoaderManager().restartLoader(GHOST_LOADER, null, this);
         }
+
+        updateGhost(2);
     }
 
     /**
@@ -427,19 +439,21 @@ public class GhostFragment extends Fragment implements LoaderManager
         mActualLap = 0;
         mLapMap = null;
 
-        // Reset views only if already initialized
-        if (mLapNumTV == null)
+        // Go ahead only if fragment initialized
+        if (getActivity() == null)
             return;
 
         mLapNumTV.setText("CURRENT LAP");
 
         for (int i = 0; i < 4; i++) {
+            // Soft reset keeps RECORD. Reset only LAST and BEST
+            if (!mGhostSpinnerA.getSelectedItem().toString().equals("ALL TIME BEST")) {
+                mGhostA[i].setTypeface(Typeface.MONOSPACE);
+                mGhostA[i].setText("--:--:---");
+            }
+
             mCur[i].setTypeface(Typeface.MONOSPACE);
-            mGhostA[i].setTypeface(Typeface.MONOSPACE);
-            mGhostB[i].setTypeface(Typeface.MONOSPACE);
             mCur[i].setText("--:--:---");
-            mGhostA[i].setText("--:--:---");
-            mGhostB[i].setText("--:--:---");
 
             mGapA[i].setText("");
             mGapB[i].setText("");
@@ -455,9 +469,17 @@ public class GhostFragment extends Fragment implements LoaderManager
     public void hardReset() {
         mActualCar = null;
         mActualTrack = null;
+        mFirstTimeSelectionDone = false;
         softReset();
-        // getActivity null after main activity's hard reset (?)
+        // Go ahead only if fragment initialized
         if (getActivity() != null) {
+            for (int i = 0; i < 4; i++) {
+                mGhostA[i].setTypeface(Typeface.MONOSPACE);
+                mGhostB[i].setTypeface(Typeface.MONOSPACE);
+                mGhostA[i].setText("--:--:---");
+                mGhostB[i].setText("--:--:---");
+            }
+
             getActivity().getSupportLoaderManager().restartLoader(GHOST_LOADER, null, this);
         }
     }
@@ -513,7 +535,7 @@ public class GhostFragment extends Fragment implements LoaderManager
                             }
                         });
                     }
-                }, 10000);   // 10s
+                }, 8000);   // 8s
             } else {
                 mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s",
                         currLap.lapNum));

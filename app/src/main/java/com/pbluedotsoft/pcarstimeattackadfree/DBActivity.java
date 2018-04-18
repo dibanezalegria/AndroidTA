@@ -26,8 +26,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.MobileAds;
 import com.pbluedotsoft.pcarstimeattackadfree.data.LapContract;
 
 import org.json.JSONArray;
@@ -36,8 +34,6 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.AdRequest;
 
 
 public class DBActivity extends AppCompatActivity implements LoaderManager

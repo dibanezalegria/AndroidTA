@@ -82,9 +82,9 @@
 
     <!-- Spinner A in GhostFragment -->
     <string-array name="spinner_values">
-        <item>LAST</item>
-        <item>BEST</item>
-        <item>RECORD</item>
+        <item>LAST LAP</item>
+        <item>BEST IN SESSION</item>
+        <item>ALL TIME BEST</item>
     </string-array>
 
     <!-- Spinner B in GhostFragment -->

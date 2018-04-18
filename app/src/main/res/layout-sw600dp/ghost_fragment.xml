@@ -217,7 +217,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:gravity="start"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/medium_text"
             android:textColor="@color/whiteText"
             android:paddingStart="24dp"
             android:paddingEnd="6dp"/>

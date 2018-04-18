@@ -36,7 +36,7 @@ public class GhostSpinnerCursorAdapter extends CursorAdapter {
         String name = cursor.getString(carColIndex);
         ghostNameTv.setText(name);
         if (name.equals(mActualCar)) {
-            ghostNameTv.setTextColor(ContextCompat.getColor(context, R.color.indigo_100));
+            ghostNameTv.setTextColor(ContextCompat.getColor(context, R.color.indigo_50));
         }
      }
 

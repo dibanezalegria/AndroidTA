@@ -50,11 +50,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.TreeMap;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import com.pbluedotsoft.pcarstimeattackadfree.data.LapContract.LapEntry;
 
 public class MainActivity extends AppCompatActivity {
