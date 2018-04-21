@@ -511,7 +511,15 @@ public class GhostFragment extends Fragment implements LoaderManager
             mCur[2].setText(Laptime.format(currLap.s2));
 
         } else if (currLap.s1 == 0) {
-            if (prevLap != null) {
+            if (prevLap == null) {
+                mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s",
+                        currLap.lapNum));
+                return;
+            }
+            // When a lap gets invalidated, sessionUpdate() in MainActivity calls this method.
+            // That is a call that we are not interested in handling here.
+            // fix: update s3 and time only when s2 is already set
+            if (!mCur[2].getText().toString().equals("--:--:---")) {
                 mCur[3].setTypeface(null, Typeface.NORMAL);
                 mCur[0].setTypeface(null, Typeface.NORMAL);
                 mCur[3].setText(Laptime.format(prevLap.s3));
@@ -536,9 +544,6 @@ public class GhostFragment extends Fragment implements LoaderManager
                         });
                     }
                 }, 8000);   // 8s
-            } else {
-                mLapNumTV.setText(String.format(Locale.ENGLISH, "LAP  %s",
-                        currLap.lapNum));
             }
         }
 

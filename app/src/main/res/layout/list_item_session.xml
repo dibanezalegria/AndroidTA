@@ -12,72 +12,77 @@
         android:id="@+id/session_lapnumber_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:paddingEnd="8dp"
-        android:paddingStart="16dp"
+        android:paddingStart="8dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:textColor="@color/whiteText"
-        android:textSize="@dimen/small_text"
+        android:textSize="@dimen/small_plus_text"
+        android:maxLines="1"
         android:background="@color/darkBg"
-        tools:text="Lap number"/>
+        tools:text="100"/>
 
     <TextView
         android:id="@+id/session_s1_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_weight="16"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:gravity="center"
         android:textColor="@color/whiteText"
-        android:textSize="@dimen/small_text"
+        android:textSize="@dimen/small_plus_text"
+        android:maxLines="1"
         tools:text="s1"/>
 
     <TextView
         android:id="@+id/session_s2_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_weight="16"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:gravity="center"
         android:textColor="@color/whiteText"
-        android:textSize="@dimen/small_text"
+        android:textSize="@dimen/small_plus_text"
+        android:maxLines="1"
         tools:text="s2"/>
 
     <TextView
         android:id="@+id/session_s3_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_weight="16"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:gravity="center"
-
-        android:textSize="@dimen/small_text"
+        android:textColor="@color/whiteText"
+        android:textSize="@dimen/small_plus_text"
+        android:maxLines="1"
         tools:text="s3"/>
 
     <TextView
         android:id="@+id/session_laptime_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_weight="16"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:gravity="center"
-        android:textSize="@dimen/small_text"
+        android:textSize="@dimen/small_plus_text"
+        android:maxLines="1"
         android:background="@color/darkBg"
         tools:text="Laptime"/>
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="30"
+        android:layout_weight="27"
         android:gravity="center_vertical"
         android:paddingEnd="6dp"
         android:paddingStart="0dp">
@@ -98,7 +103,8 @@
             android:gravity="end"
             android:paddingEnd="10dp"
             android:paddingStart="0dp"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/small_plus_text"
+            android:maxLines="1"
             android:text="-"
             android:textColor="@color/whiteText"/>
     </RelativeLayout>
