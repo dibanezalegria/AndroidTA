@@ -277,6 +277,10 @@ public class GhostFragment extends Fragment implements LoaderManager
      * @param ghostID - 0 updates ghostA TextViews, 1 updates ghostB TextViews
      */
     private void updateGhost(int ghostID) {
+        // Go ahead only if fragment initialized
+        if (getActivity() == null)
+            return;
+
         switch(ghostID) {
             case 0:
                 // Spinner A
@@ -333,7 +337,7 @@ public class GhostFragment extends Fragment implements LoaderManager
                         if (mActualCar == null) {
                             for (int i = 0; i < 4; i++) {
                                 mGhostA[i].setTypeface(Typeface.MONOSPACE);
-                                mGhostA[i].setText("--:--:---");
+                                mGhostA[i].setText("--:--.---");
                             }
                             return;
                         }
@@ -449,11 +453,11 @@ public class GhostFragment extends Fragment implements LoaderManager
             // Soft reset keeps RECORD. Reset only LAST and BEST
             if (!mGhostSpinnerA.getSelectedItem().toString().equals("ALL TIME BEST")) {
                 mGhostA[i].setTypeface(Typeface.MONOSPACE);
-                mGhostA[i].setText("--:--:---");
+                mGhostA[i].setText("--:--.---");
             }
 
             mCur[i].setTypeface(Typeface.MONOSPACE);
-            mCur[i].setText("--:--:---");
+            mCur[i].setText("--:--.---");
 
             mGapA[i].setText("");
             mGapB[i].setText("");
@@ -476,8 +480,8 @@ public class GhostFragment extends Fragment implements LoaderManager
             for (int i = 0; i < 4; i++) {
                 mGhostA[i].setTypeface(Typeface.MONOSPACE);
                 mGhostB[i].setTypeface(Typeface.MONOSPACE);
-                mGhostA[i].setText("--:--:---");
-                mGhostB[i].setText("--:--:---");
+                mGhostA[i].setText("--:--.---");
+                mGhostB[i].setText("--:--.---");
             }
 
             getActivity().getSupportLoaderManager().restartLoader(GHOST_LOADER, null, this);
@@ -491,6 +495,10 @@ public class GhostFragment extends Fragment implements LoaderManager
      * @param lapMap - laps in current session
      */
     public void updateLapList(int lapNum, TreeMap<Integer, Laptime> lapMap) {
+        // Go ahead only if fragment initialized
+        if (getActivity() == null)
+            return;
+
         mActualLap = lapNum;
         mLapMap = lapMap;
         final Laptime currLap = lapMap.get(lapNum);
@@ -519,7 +527,7 @@ public class GhostFragment extends Fragment implements LoaderManager
             // When a lap gets invalidated, sessionUpdate() in MainActivity calls this method.
             // That is a call that we are not interested in handling here.
             // fix: update s3 and time only when s2 is already set
-            if (!mCur[2].getText().toString().equals("--:--:---")) {
+            if (!mCur[2].getText().toString().equals("--:--.---")) {
                 mCur[3].setTypeface(null, Typeface.NORMAL);
                 mCur[0].setTypeface(null, Typeface.NORMAL);
                 mCur[3].setText(Laptime.format(prevLap.s3));
@@ -536,7 +544,7 @@ public class GhostFragment extends Fragment implements LoaderManager
                                         currLap.lapNum));
                                 for (int i = 0; i < 4; i++) {
                                     mCur[i].setTypeface(Typeface.MONOSPACE);
-                                    mCur[i].setText("--:--:---");
+                                    mCur[i].setText("--:--.---");
                                 }
                                 updateGhost(2);
                                 updateGaps(2);      // reset gaps
@@ -559,12 +567,16 @@ public class GhostFragment extends Fragment implements LoaderManager
      * @param gapID - 0 update ghostA-current, 1 update current-ghostB and 2 update both
      */
     private void updateGaps(int gapID) {
+        // Go ahead only if fragment initialized
+        if (getActivity() == null)
+            return;
+
         switch (gapID) {
             case 0:
                 // Update gap ghostA/current
                 for (int i = 0; i < 4; i++) {
-                    if (!mCur[i].getText().equals("--:--:---") && !mGhostA[i]
-                            .getText().equals("--:--:---")) {
+                    if (!mCur[i].getText().equals("--:--.---") && !mGhostA[i]
+                            .getText().equals("--:--.---")) {
 
                         float gap = Laptime.getGap(timeToFloat(mCur[i].getText().toString()),
                                 timeToFloat(mGhostA[i].getText().toString()));
@@ -596,8 +608,8 @@ public class GhostFragment extends Fragment implements LoaderManager
             case 1:
                 // Update gap current/ghostB
                 for (int i = 0; i < 4; i++) {
-                    if (!mCur[i].getText().equals("--:--:---") && !mGhostB[i]
-                            .getText().equals("--:--:---")) {
+                    if (!mCur[i].getText().equals("--:--.---") && !mGhostB[i]
+                            .getText().equals("--:--.---")) {
 
                         float gap = Laptime.getGap(timeToFloat(mCur[i].getText().toString()),
                                 timeToFloat(mGhostB[i].getText().toString()));
@@ -636,11 +648,11 @@ public class GhostFragment extends Fragment implements LoaderManager
     /**
      * Converts time in string format into seconds
      *
-     * @param str - string format [--:--:---]
+     * @param str - string format [--:--.---]
      * @return  time in seconds
      */
     private float timeToFloat(String str) {
-        if (str.equals("--:--:---"))
+        if (str.equals("--:--.---"))
             return 0;
 
         float time = 0;

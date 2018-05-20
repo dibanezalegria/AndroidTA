@@ -664,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
         mCarTrackComboTV.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),
                 R.color.waiting_car_track_info));
         mRecordTV.setTypeface(Typeface.MONOSPACE);
-        mRecordTV.setText("--:--:---");
+        mRecordTV.setText("--:--.---");
 //        Log.d(TAG, "--------------------- HARD reset");
     }
 

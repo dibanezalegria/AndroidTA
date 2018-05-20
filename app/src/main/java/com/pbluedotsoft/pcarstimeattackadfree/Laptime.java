@@ -35,11 +35,11 @@ public class Laptime {
     /**
      * Formats given time to string.
      *
-     * @return string '--:--:---'
+     * @return string '--:--.---'
      */
     public static String format(float time) {
         if (time <= 0 || time == Float.MAX_VALUE) {
-            return "--:--:---";
+            return "--:--.---";
         }
 
         time = BigDecimal.valueOf(time).setScale(3, BigDecimal.ROUND_HALF_UP)
@@ -49,14 +49,14 @@ public class Laptime {
         int seconds = (int) time % 60;
         int msec = ((int) (time * 1000)) % 1000;
         return String.format(Locale.ENGLISH, "%02d", minutes) +
-                ":" + String.format(Locale.ENGLISH,"%02d", seconds) + ":" +
+                ":" + String.format(Locale.ENGLISH,"%02d", seconds) + "." +
                 String.format(Locale.ENGLISH,"%03d", msec);
     }
 
     /**
      * Calculates difference between slow time and fast.
      *
-     * @return string with format '+00:00:000'
+     * @return string with format '+00:00.000'
      */
     public static String getGapStr(float slow, float fast) {
         float time = BigDecimal.valueOf(slow - fast).setScale(3, BigDecimal.ROUND_HALF_UP)
