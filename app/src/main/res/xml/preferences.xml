@@ -13,7 +13,7 @@
         android:title="@string/pref_broadcast_title"
         android:summary="@string/pref_broadcast_summary"
         android:defaultValue="@string/pref_default_broadcast"
-        android:inputType="number"/>
+        android:digits="0123456789."/>
 
     <EditTextPreference
         android:key="@string/pref_session_gap_key"

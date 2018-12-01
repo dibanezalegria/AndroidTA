@@ -168,7 +168,12 @@ public class MainActivity extends AppCompatActivity {
                 "");
         String maxStr = sharedPref.getString(getResources().getString(R.string.pref_session_gap_key)
                 , "15");
-        int maxGap = (Integer.parseInt(maxStr) < 5) ? 5 : Integer.parseInt(maxStr);
+        int maxGap = 15;
+        try {
+            maxGap = (Integer.parseInt(maxStr) < 5) ? 5 : Integer.parseInt(maxStr);
+        } catch (NumberFormatException e) {
+            Log.d(TAG, "maxGap exception");
+        }
 
         // Sets max length for the gap's graph chart in fragment
         mSessionFragment.setMaxGap(maxGap);     // SessionAdapter will get it when first update()
@@ -191,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
             mSocket = new DatagramSocket(PORT, InetAddress.getByName(broadcast));
             mSocket.setBroadcast(true);
             mAppOn = true;
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Is your WiFi on? Try changing your " +
+            Toast.makeText(getApplicationContext(), "Network problem. Check " +
                     "broadcast address in settings and restart.", Toast.LENGTH_LONG).show();
         }
 
